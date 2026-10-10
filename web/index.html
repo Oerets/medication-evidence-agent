@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>약물 이력 검토 · MIMIC-IV</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><a class="brand" href="/">Chart Review<span>약물 이력 검토</span></a><div class="header-right"><span class="pill">MIMIC-IV DEMO 2.2 · <b id="patientCount">—</b>명</span><span>로컬 연구용</span></div></header>
+<main>
+ <div class="notice"><strong>현재 데이터로는 알레르기 여부를 판단할 수 없습니다.</strong><span>처방·투약 이력과 진단 코드는 검토 근거입니다. 기록 미발견은 알레르기 없음을 뜻하지 않습니다.</span></div>
+ <section class="scope"><div><strong>조회 범위</strong><p>기본은 전체 기록의 후향적 조회입니다. 기준 시점을 넣으면 사건·저장 시각으로 제한합니다. 진단은 퇴원 시점을 대용값으로 사용합니다.</p></div><label>기준 시점 <input id="cutoff" type="datetime-local" step="1"><small>MIMIC의 이동된 날짜 · 실제 오늘 날짜와 다릅니다.</small></label><button id="applyScope" class="secondary">범위 적용</button></section>
+ <div class="workspace">
+  <section class="panel patient-panel"><div class="panel-title"><h2>환자 목록</h2><span id="selectedCount">0명 선택</span></div><label class="search-label">환자 ID 검색<input id="patientSearch" placeholder="예: 10001725" inputmode="numeric"></label><div class="list-actions"><label><input id="selectAll" type="checkbox"> 검색 결과 전체 선택</label><button id="prepare" disabled>선택 환자 사전 정리</button></div><div id="job" aria-live="polite"></div><div class="patient-head"><span>선택 / 환자 ID</span><span>입원</span><span>준비 상태</span></div><div id="patients" class="patient-list"></div><p class="footnote">나이는 anchor 연도의 기준 나이입니다. 환자별 날짜 이동량이 달라 환자 간 달력 비교는 할 수 없습니다.</p></section>
+  <section class="panel review-panel"><div class="panel-title"><h2>약물 근거 검토</h2><span id="activePatient" class="pill">환자를 선택하세요</span></div><div id="emptyState" class="empty"><div class="empty-icon">↗</div><h3>검토할 환자를 열어주세요</h3><p>왼쪽에서 환자를 선택해 사전 정리한 다음,<br>환자 ID를 눌러 약물 이력을 확인하세요.</p></div><div id="detail" hidden><div id="patientOverview"></div><form id="drugForm"><label>투약 예정 약물<input id="drug" list="drugOptions" placeholder="약물명을 선택하거나 입력하세요" autocomplete="off" required maxlength="200"><datalist id="drugOptions"></datalist></label><button type="submit">근거 조회</button></form><p class="footnote">약물명은 공백·대소문자만 정규화합니다. 상품명·성분·약물군의 동등성이나 교차반응을 추정하지 않습니다.</p><div id="result" aria-live="polite"></div></div></section>
+ </div>
+ <footer><span>MIMIC-IV Clinical Database Demo 2.2 · PhysioNet · ODbL 1.0</span><a href="https://physionet.org/content/mimic-iv-demo/2.2/" target="_blank" rel="noopener noreferrer">데이터 출처 ↗</a><span>외부 AI 서비스 전송 없음</span></footer>
+</main>
+<aside id="sourceDialog" class="source-panel" aria-label="원본 근거" hidden><div class="panel-title"><h2>원본 근거</h2><button id="closeSource" class="secondary">닫기</button></div><p id="sourceTitle"></p><div id="sourceContent"></div></aside>
+<div id="toast" role="status" hidden></div>
+</body></html>

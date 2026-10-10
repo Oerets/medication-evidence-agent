@@ -1,0 +1,9 @@
+{
+  "dataset": "MIMIC-IV Clinical Database Demo",
+  "version": "2.2",
+  "raw_dir": "data/raw/mimic-iv-clinical-database-demo-2.2",
+  "database": "data/processed/mimic_demo.sqlite3",
+  "host": "127.0.0.1",
+  "port": 8765,
+  "agent": {"url": "http://127.0.0.1:11434", "model": "qwen3:32b", "context": 8192, "timeout": 600, "max_rounds": 5}
+}
